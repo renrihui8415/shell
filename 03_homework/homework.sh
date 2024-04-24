@@ -43,16 +43,25 @@ sed -i '' 's/[[:punct:]]\([^[:punct:]]*\)$/ and machine learning!\1/' dir2/text3
 cat dir2/text3.txt
 
 # 7. How would you delete all files except for the one with the appended text?
-# Loop through directories 1 to 5
 for i in {1..5}; do
-    # Check if the directory is dir2 
+    # Print the value of i
+    echo "Current value of i: $i"
+
+    # Check if the directory is dir2
     if [ "$i" -eq 2 ]; then
+        # Print a debug message
+        echo "Deleting files in dir2..."
+
         # Delete all files in dir2 except text3.txt
-        find . -type f ! -path "./dir2/text3.txt" -delete
+        find dir2 -type f ! -path "./dir2/text3.txt" -delete
+
         # Skip the rest and go to the next iteration
         continue
     fi
 
+    # Print a debug message
+    echo "Deleting files in dir${i}..."
+    echo "rm -f dir${i}/*"
     # Delete the files
     rm -f dir${i}/*
 done
